@@ -1,6 +1,23 @@
 // Initialize the map centered on Seattle
 const map = L.map('map').setView([47.6062, -122.3321], 11);
 
+// Jurisdiction code mapping
+const jurisdictionMap = {
+    'BEL': 'Bellevue',
+    'SEA': 'Seattle',
+    'FDY': 'Federal Way',
+    'KNT': 'Kent',
+    'NEW': 'Newaukum',
+    'COV': 'Covington',
+    'MI': 'Mercer Island',
+    'DUV': 'Duvall',
+    'NOB': 'North Bend',
+    'CH': 'Clyde Hill',
+    'KCM': 'King County',
+    'UNK': 'Unknown',
+    'DOT': 'State DOT'
+};
+
 // Add OpenStreetMap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors',
@@ -18,11 +35,11 @@ let markerGroup = L.markerClusterGroup({
 
 // Color scheme for markers based on number of routes
 function getMarkerColor(routeCount) {
-    if (!routeCount || routeCount === 'No routes') return '#3388ff';
+    if (!routeCount || routeCount === 'No routes') return '#667eea';
     const count = parseInt(routeCount) || 0;
-    if (count <= 2) return '#3388ff';      // Blue - small
-    if (count <= 5) return '#ff8800';      // Orange - medium
-    return '#ee5e00';                      // Red - large
+    if (count <= 2) return '#667eea';      // Blue/Purple - small
+    if (count <= 5) return '#f5576c';      // Pink/Red - medium
+    return '#fee140';                      // Yellow - large
 }
 
 // Create custom marker icon
@@ -44,33 +61,51 @@ function createPopupContent(feature) {
     let html = '<div class="popup-content">';
     html += '<div class="popup-header">';
     html += `<div class="stop-name">${props.stop_name || 'Unknown Stop'}</div>`;
-    html += `<div class="stop-id">Stop ID: ${props.stop_id}</div>`;
+    html += `<div class="stop-id">Stop #${props.stop_id}</div>`;
     html += '</div>';
     
     html += '<div class="popup-info">';
     
-    // Routes serving
+    // Routes serving - Main focus
+    html += '<div class="popup-info-row" style="margin-bottom: 14px;">';
+    html += '<div style="width: 100%;">';
+    html += '<div class="info-label" style="margin-bottom: 6px;">Routes Serving</div>';
     if (routesArray.length > 0) {
-        html += '<div class="popup-info-row"><span class="info-label">Routes:</span>';
         routesArray.forEach(route => {
             if (route) {
                 html += `<span class="routes-badge">${route}</span>`;
             }
         });
-        html += '</div>';
+    } else {
+        html += '<span style="color: #999; font-size: 12px;">No routes assigned</span>';
     }
+    html += '</div>';
+    html += '</div>';
     
-    // Jurisdiction
+    // Location / Jurisdiction
     if (props.jurisdiction) {
-        html += `<div class="popup-info-row"><span class="info-label">Area:</span><span class="info-value">${props.jurisdiction}</span></div>`;
+        const jurisdictionName = jurisdictionMap[props.jurisdiction] || props.jurisdiction;
+        html += `<div class="popup-info-row">`;
+        html += `<div class="info-label">Service Area</div>`;
+        html += `<div class="info-value">${jurisdictionName}</div>`;
+        html += `</div>`;
     }
     
     // Shelter
-    html += `<div class="popup-info-row"><span class="info-label">Shelter:</span><span class="info-value">${props.has_shelter}</span></div>`;
+    const shelterClass = props.has_shelter === 'Yes' ? 'yes' : 'no';
+    const shelterIcon = props.has_shelter === 'Yes' ? '✓' : '✗';
+    html += `<div class="popup-info-row">`;
+    html += `<div class="info-label">Shelter</div>`;
+    html += `<div><span class="shelter-badge ${shelterClass}">${shelterIcon} ${props.has_shelter}</span></div>`;
+    html += `</div>`;
     
     // Accessibility
     const accessClass = props.accessibility.includes('ADA') ? 'yes' : 'no';
-    html += `<div class="popup-info-row"><span class="accessibility ${accessClass}">${props.accessibility}</span></div>`;
+    const accessIcon = props.accessibility.includes('ADA') ? '♿' : '—';
+    html += `<div class="popup-info-row">`;
+    html += `<div class="info-label">Accessible</div>`;
+    html += `<div><span class="accessibility ${accessClass}">${accessIcon} ${props.accessibility}</span></div>`;
+    html += `</div>`;
     
     html += '</div>';
     html += '</div>';
