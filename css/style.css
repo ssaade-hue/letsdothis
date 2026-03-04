@@ -364,25 +364,28 @@ body {
 }
 
 .marker-cluster.marker-cluster-small {
-    background-color: rgba(181, 226, 140, 0.6);
+    background-color: rgba(102, 126, 234, 0.2);
 }
 
 .marker-cluster.marker-cluster-small div {
-    background-color: #b5e28c;
+    background-color: #667eea;
+    color: white;
 }
 
 .marker-cluster.marker-cluster-medium {
-    background-color: rgba(241, 211, 87, 0.6);
+    background-color: rgba(33, 150, 243, 0.2);
 }
 
 .marker-cluster.marker-cluster-medium div {
-    background-color: #f1d357;
+    background-color: #2196F3;
+    color: white;
 }
 
 .marker-cluster.marker-cluster-large {
-    background-color: rgba(253, 156, 115, 0.6);
+    background-color: rgba(0, 188, 212, 0.2);
 }
 
 .marker-cluster.marker-cluster-large div {
-    background-color: #fd9c73;
+    background-color: #00BCD4;
+    color: white;
 }
