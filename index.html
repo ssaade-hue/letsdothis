@@ -29,12 +29,18 @@
     
     <!-- Search Box -->
     <div class="search-box">
-        <input 
-            type="text" 
-            id="search-input"
-            placeholder="Search stops & routes..."
-            autocomplete="off"
-        >
+        <div class="search-controls">
+            <input 
+                type="text" 
+                id="search-input"
+                placeholder="Search..."
+                autocomplete="off"
+            >
+            <div class="search-toggle">
+                <button id="mode-route" class="toggle-btn active" data-mode="route">Route</button>
+                <button id="mode-location" class="toggle-btn" data-mode="location">Location</button>
+            </div>
+        </div>
         <button id="clear-search" style="padding: 8px 12px; margin-top: 5px; background: #e0e0e0; color: #333; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Clear</button>
     </div>
     

@@ -174,6 +174,34 @@ function displayStops(stops) {
     map.addLayer(markerGroup);
 }
 
+// Search mode state
+let searchMode = 'route'; // 'route' or 'location'
+
+// Toggle button handlers
+document.getElementById('mode-route').addEventListener('click', function() {
+    searchMode = 'route';
+    document.getElementById('mode-route').classList.add('active');
+    document.getElementById('mode-location').classList.remove('active');
+    document.getElementById('search-input').placeholder = 'Search routes...';
+    // Re-run search with current query
+    const query = document.getElementById('search-input').value;
+    if (query.trim()) {
+        document.getElementById('search-input').dispatchEvent(new Event('input'));
+    }
+});
+
+document.getElementById('mode-location').addEventListener('click', function() {
+    searchMode = 'location';
+    document.getElementById('mode-location').classList.add('active');
+    document.getElementById('mode-route').classList.remove('active');
+    document.getElementById('search-input').placeholder = 'Search locations...';
+    // Re-run search with current query
+    const query = document.getElementById('search-input').value;
+    if (query.trim()) {
+        document.getElementById('search-input').dispatchEvent(new Event('input'));
+    }
+});
+
 // Search functionality
 document.getElementById('search-input').addEventListener('input', function(e) {
     const query = e.target.value.toLowerCase().trim();
@@ -185,20 +213,17 @@ document.getElementById('search-input').addEventListener('input', function(e) {
     
     filteredStops = allStops.filter(stop => {
         const props = stop.properties;
-        const stopName = (props.stop_name || '').toLowerCase();
-        const routes = (props.routes_serving || '');
         
-        // For stop names, do partial match
-        if (stopName.includes(query)) {
-            return true;
+        if (searchMode === 'route') {
+            // Search only by route number (exact match)
+            const routes = (props.routes_serving || '');
+            const routeArray = routes.split(/\s+/).map(r => r.trim()).filter(r => r);
+            return routeArray.some(route => route === query);
+        } else {
+            // Search only by location name (partial match)
+            const stopName = (props.stop_name || '').toLowerCase();
+            return stopName.includes(query);
         }
-        
-        // For routes, match exact route numbers only
-        // Split routes and check if any match exactly
-        const routeArray = routes.split(',').map(r => r.trim());
-        const hasExactRoute = routeArray.some(route => route.toLowerCase() === query);
-        
-        return hasExactRoute;
     });
     
     displayStops(filteredStops);

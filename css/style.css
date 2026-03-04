@@ -143,14 +143,22 @@ body {
     z-index: 1000;
 }
 
+.search-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
 .search-box input {
-    width: 280px;
+    flex: 1;
     padding: 10px 14px;
     border: 2px solid #e8e8e8;
     border-radius: 8px;
     font-size: 14px;
     font-family: inherit;
     transition: all 0.3s ease;
+    min-width: 200px;
 }
 
 .search-box input:focus {
@@ -161,6 +169,32 @@ body {
 
 .search-box input::placeholder {
     color: #999;
+}
+
+.search-toggle {
+    display: flex;
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 2px;
+    gap: 2px;
+}
+
+.toggle-btn {
+    padding: 8px 14px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
 }
 
 /* Leaflet Popup Customization */
