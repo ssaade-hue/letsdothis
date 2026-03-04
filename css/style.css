@@ -118,11 +118,11 @@ body {
 }
 
 .legend-circle.medium {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
 }
 
 .legend-circle.large {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%);
 }
 
 .legend-item span {
@@ -257,13 +257,13 @@ body {
 }
 
 .accessibility.yes {
-    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-    color: #1a5f3f;
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
 }
 
 .accessibility.no {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    color: #5a4a3a;
+    background: linear-gradient(135deg, #9C9C9C 0%, #757575 100%);
+    color: white;
 }
 
 .shelter-badge {
@@ -277,13 +277,13 @@ body {
 }
 
 .shelter-badge.yes {
-    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-    color: #1a5f3f;
+    background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%);
+    color: white;
 }
 
 .shelter-badge.no {
-    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-    color: #4a3a5f;
+    background: linear-gradient(135deg, #9C9C9C 0%, #757575 100%);
+    color: white;
 }
 
 /* Loading indicator */

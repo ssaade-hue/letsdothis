@@ -37,9 +37,9 @@ let markerGroup = L.markerClusterGroup({
 function getMarkerColor(routeCount) {
     if (!routeCount || routeCount === 'No routes') return '#667eea';
     const count = parseInt(routeCount) || 0;
-    if (count <= 2) return '#667eea';      // Blue/Purple - small
-    if (count <= 5) return '#f5576c';      // Pink/Red - medium
-    return '#fee140';                      // Yellow - large
+    if (count <= 2) return '#667eea';      // Purple - small
+    if (count <= 5) return '#2196F3';      // Blue - medium
+    return '#00BCD4';                      // Teal - large
 }
 
 // Create custom marker icon
