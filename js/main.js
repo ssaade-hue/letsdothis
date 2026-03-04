@@ -186,12 +186,11 @@ document.getElementById('search-input').addEventListener('input', function(e) {
     filteredStops = allStops.filter(stop => {
         const props = stop.properties;
         const stopName = (props.stop_name || '').toLowerCase();
-        const stopId = (props.stop_id || '').toLowerCase();
         const routes = (props.routes_serving || '').toLowerCase();
         
-        return stopName.includes(query) || 
-               stopId.includes(query) || 
-               routes.includes(query);
+        // Search by stop name OR route number
+        // Don't search by stop ID anymore
+        return stopName.includes(query) || routes.includes(query);
     });
     
     displayStops(filteredStops);
