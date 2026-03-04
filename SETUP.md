@@ -1,38 +1,16 @@
 # Setup & Deployment Guide
 
-## 🚀 Local Development
+## 🚀 View the Map
 
-### Option 1: Direct Open (Simplest)
+Simply open `index.html` in your web browser:
 ```bash
-# Just open the file in your browser
+# macOS
 open index.html
+
+# Or just double-click the file in your file manager
 ```
 
-**Note**: May have CORS restrictions with some browsers. Use Option 2 if needed.
-
-### Option 2: Local Server (Recommended)
-```bash
-# Using the included script (macOS/Linux)
-./start_server.sh
-
-# Or manually with Python
-python3 -m http.server 8000
-
-# Then open in browser: http://localhost:8000
-```
-
-### Option 3: Other Web Servers
-```bash
-# Node.js (with http-server)
-npm install -g http-server
-http-server
-
-# PHP (if available)
-php -S localhost:8000
-
-# Ruby
-ruby -run -ehttpd . -p8000
-```
+The map will load all 6,422 bus stops and work entirely in your browser.
 
 ---
 

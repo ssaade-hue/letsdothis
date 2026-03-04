@@ -65,13 +65,13 @@ An interactive, static web map displaying all **14,945 active Seattle/King Count
 
 ## Usage
 
-### Local
-- Open `index.html` directly, or
-- Use a local server: `python3 -m http.server 8000`
+### View the Map
+1. Open `index.html` in your web browser
+2. Explore, search, and click on bus stops for details
 
 ### GitHub Pages
 1. Push to GitHub
-2. Enable GitHub Pages in settings
+2. Enable GitHub Pages in repository settings
 3. Access at `https://yourusername.github.io/repo-name`
 
 ## Marker Colors
