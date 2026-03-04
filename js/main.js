@@ -186,11 +186,19 @@ document.getElementById('search-input').addEventListener('input', function(e) {
     filteredStops = allStops.filter(stop => {
         const props = stop.properties;
         const stopName = (props.stop_name || '').toLowerCase();
-        const routes = (props.routes_serving || '').toLowerCase();
+        const routes = (props.routes_serving || '');
         
-        // Search by stop name OR route number
-        // Don't search by stop ID anymore
-        return stopName.includes(query) || routes.includes(query);
+        // For stop names, do partial match
+        if (stopName.includes(query)) {
+            return true;
+        }
+        
+        // For routes, match exact route numbers only
+        // Split routes and check if any match exactly
+        const routeArray = routes.split(',').map(r => r.trim());
+        const hasExactRoute = routeArray.some(route => route.toLowerCase() === query);
+        
+        return hasExactRoute;
     });
     
     displayStops(filteredStops);
